@@ -6,12 +6,15 @@ const page = () => {
   const [title, settitle]=useState("")
   const [description, setdescription] = useState("")
   const [iscompleted, setiscompleted] = useState(false)
-
+  const [isTask, isTaskCompleted] = useState(false)
   const [taskwrapper, settaskwrapper] = useState([])
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    title ? settaskwrapper([...taskwrapper, {title, description, iscompleted}]) : ""
+    title ? settaskwrapper([...taskwrapper, {title, description, iscompleted}]) : "";
+    title ? isTaskCompleted(false) : isTaskCompleted(true);
+    console.log({isTaskCompleted})
+    console.log("isTaskCompleted")
     settitle("")
     setdescription("")
   }
@@ -58,15 +61,21 @@ const page = () => {
     <>
       <h1 className='bg-black text-white text-center font-bold py-10 px-5 text-4xl'>My Todo List</h1>
       <div className='container mx-auto my-20'>
-        <form className='sm:flex justify-center items-center px-10 sm:px-0' onSubmit={handleSubmit}>
-            <input type='text' className='text-xl border-zinc-800 border rounded-sm py-3 px-5 my-5 mr-5 shadow shadow-zinc-600 drop-shadow' placeholder='please enter task' value={title} onChange={(e) => {
+        <form className='sm:flex justify-center items-top px-10 sm:px-0' onSubmit={handleSubmit}>
+          <div>
+            <input type='text' className='text-xl border-zinc-800 border rounded-sm py-3 px-5 mb-5 mr-5 shadow shadow-zinc-600 drop-shadow' placeholder='please enter task' value={title} onChange={(e) => {
               settitle(e.target.value)
             }}></input>
-            <input type='text' className='text-xl border-zinc-800 border rounded-sm py-3 px-5 my-5 mr-5 shadow shadow-zinc-600 drop-shadow' placeholder='please description here' value={description} onChange={(e) => {
+            {isTask && <p>Please enter task</p> }
+          </div>
+          <div>
+            <input type='text' className='text-xl border-zinc-800 border rounded-sm py-3 px-5 mb-5 mr-5 shadow shadow-zinc-600 drop-shadow' placeholder='please description here' value={description} onChange={(e) => {
               setdescription(e.target.value)
             }}></input>
+          </div>
+          <div>
             <button className='bg-black text-white px-4 py-3 rounded text-xl hover:bg-slate-900'>Add Task</button>
-
+          </div>    
         </form>
       </div>        
         <div className='py-20 bg-gray-400'>
