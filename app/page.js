@@ -11,14 +11,14 @@ const page = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    settaskwrapper([...taskwrapper, {title, description, iscompleted}])
+    title ? settaskwrapper([...taskwrapper, {title, description, iscompleted}]) : ""
     settitle("")
     setdescription("")
   }
 
   const deleteTask = (i) => {
     let copytask = [...taskwrapper]
-    copytask.splice(i)
+    copytask.splice(i, 1)
     settaskwrapper(copytask)
   }
 
